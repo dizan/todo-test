@@ -6,7 +6,7 @@ import styled from 'styled-components';
 export interface TaskStateProps {
     selected: boolean;
     className: string;
-    onSelect: void;
+    onSelect?: any;
 }
 
 const TaskStateWrapper = styled.span`

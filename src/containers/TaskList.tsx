@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import TaskItem from '../components/TaskItem';
 import { TaskDate } from '../types/enums';
 import styled from 'styled-components';
-import { ListContext } from '../Todo';
 
 export interface TaskListProps {
     // completed: boolean;
@@ -14,7 +13,7 @@ const TaskListWrapper = styled.div`
 
 const WrappedTaskItem = styled(TaskItem)`
     margin-bottom:30px;
-`
+`;
 
 export function TaskList({}: TaskListProps) {
     // const todoContext = useContext(ListContext);
@@ -34,10 +33,10 @@ export function TaskList({}: TaskListProps) {
             </header>
 
             <div>
-                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={false} title={"title"}/>
-                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={true} title={"title"}/>
-                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={false} title={"title"}/>
-                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={true} title={"title"}/>
+                <WrappedTaskItem className="" id={123} date={TaskDate.TODAY} text={"123"} isCompleted={false} title={"title"}/>
+                <WrappedTaskItem className=""  id={123} date={TaskDate.TODAY} text={"123"} isCompleted={true} title={"title"}/>
+                <WrappedTaskItem className="" id={123} date={TaskDate.TODAY} text={"123"} isCompleted={false} title={"title"}/>
+                <WrappedTaskItem className="" id={123} date={TaskDate.TODAY} text={"123"} isCompleted={true} title={"title"}/>
             </div>
         </TaskListWrapper>
     );

@@ -3,17 +3,16 @@ import close from '../../assets/images/close.png';
 import stateUnselected from '../../assets/images/state-unselected.png';
 import React from 'react';
 
-export interface SelectStateProps {
-    selected: boolean;
+export interface CloseButtonProps {
     className: string;
-    onClose: void;
+    onClose?: any;
 }
 
 const CloseButtonWrapper = styled.span`
   cursor:pointer;
 `;
 
-function CloseButton({selected, className, onClose}: SelectStateProps) {
+function CloseButton({className, onClose}: CloseButtonProps) {
     return (
         <CloseButtonWrapper className={className} onClick={onClose}>
             <img src={close} alt="" />
