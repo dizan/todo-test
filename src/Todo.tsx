@@ -28,27 +28,27 @@ const ModuleWrapper = styled.section`
   }
 `;
 
+//
+// export const context: TodosContext = {
+//     todos: [
+//         {
+//             id:1,
+//             title: "test",
+//             text: "text",
+//             date: TaskDate.TODAY,
+//             isCompleted: false
+//         }
+//     ],
+//     addTodo: ( title: string, text: string, date: TaskDate) => {
+//         this?.todos?.push(
+//             {id: generateId(), title: title, text: text, date: date, isCompleted: false}
+//         );
+//     }
+// };
 
-export const context: TodosContext = {
-    todos: [
-        {
-            id:1,
-            title: "test",
-            text: "text",
-            date: TaskDate.TODAY,
-            isCompleted: false
-        }
-    ],
-    addTodo: ( title: string, text: string, date: TaskDate) => {
-        this?.todos?.push(
-            {id: generateId(), title: title, text: text, date: date, isCompleted: false}
-        );
-    }
-};
 
 
-
-export const ListContext = React.createContext<TodosContext>(context);
+// export const ListContext = React.createContext<TodosContext>(context);
 
 function TodoContainer() {
 
@@ -78,9 +78,9 @@ function TodoContainer() {
 const Todo = () => (
     <>
         <GlobalStyle />
-            <ListContext.Provider value={context}>
+            {/*<ListContext.Provider value={context}>*/}
                 <TodoContainer />
-            </ListContext.Provider>
+            {/*</ListContext.Provider>*/}
     </>
 );
 

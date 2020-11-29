@@ -17,13 +17,13 @@ const WrappedTaskItem = styled(TaskItem)`
 `
 
 export function TaskList({}: TaskListProps) {
-    const todoContext = useContext(ListContext);
+    // const todoContext = useContext(ListContext);
 
-    function getList() {
-        return todoContext.todos.map((todo) => {
-            <WrappedTaskItem id={todo.id} date={todo.date} text={todo.text} isCompleted={todo.isCompleted} title={todo.title}/>
-        })
-    }
+    // function getList() {
+    //     return todoContext.todos.map((todo) => {
+    //         <WrappedTaskItem id={todo.id} date={todo.date} text={todo.text} isCompleted={todo.isCompleted} title={todo.title}/>
+    //     })
+    // }
 
     return (
         <TaskListWrapper>
@@ -34,9 +34,10 @@ export function TaskList({}: TaskListProps) {
             </header>
 
             <div>
-                {
-                    getList()
-                }
+                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={false} title={"title"}/>
+                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={true} title={"title"}/>
+                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={false} title={"title"}/>
+                <WrappedTaskItem id={123} date={TaskDate.TODAY} text={"123"} isCompleted={true} title={"title"}/>
             </div>
         </TaskListWrapper>
     );
