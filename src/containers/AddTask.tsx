@@ -17,11 +17,15 @@ export function AddTask() {
 
     const todoContext = useContext(ListContext);
 
+    function clearFields() {
+        setTitle('');
+        setDescription('');
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
         todoContext.addTodo(title, description, date);
-        console.log("Ura!", e)
+        clearFields();
     }
 
     return (
@@ -52,7 +56,7 @@ export function AddTask() {
                         <option value={TaskDate.TOMORROW}>Tomorrow</option>
                     </select>
 
-                    <Button onClick={handleSubmit}>Add</Button>
+                    <Button type="submit" >Add</Button>
                 </form>
 
 

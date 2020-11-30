@@ -38,7 +38,14 @@ export function TaskList({title, date}: TaskListProps) {
 
     const getList = () => {
         return todoContext.todos.filter(todo => todo.date === date).map((todo) => {
-            return <WrappedTaskItem onComplete={() => completeTodoHandle(todo.id) } onClose={() => closeHandle(todo.id) } className="" id={todo.id} date={todo.date} text={todo.text} isCompleted={todo.isCompleted} title={todo.title}/>
+            return <WrappedTaskItem onComplete={() => completeTodoHandle(todo.id) }
+                                    onClose={() => closeHandle(todo.id) }
+                                    className=""
+                                    id={todo.id}
+                                    key = {todo.id}
+                                    date={todo.date} text={todo.text}
+                                    isCompleted={todo.isCompleted}
+                                    title={todo.title}/>
         })
     };
 
