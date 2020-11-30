@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import close from '../../assets/images/close.png';
-import stateUnselected from '../../assets/images/state-unselected.png';
 import React from 'react';
 
 export interface CloseButtonProps {

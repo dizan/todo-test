@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import TaskState from './controls/TaskState';
 import { TaskDate } from '../types/enums';
@@ -11,6 +11,8 @@ export interface TaskItemProps {
     text: string;
     isCompleted: boolean;
     className: string;
+    onClose(id: number): void;
+    onComplete(id: number): void;
 }
 
 
@@ -44,11 +46,12 @@ const TaskItemWrapper = styled.section`
   
   .content{
     margin-bottom: 20px;
+    word-break: break-all;
   }
 `;
 
 
-function TaskItem({id, date, isCompleted, text,title, className}: TaskItemProps) {
+function TaskItem({id, date, isCompleted, text,title, className, onClose, onComplete}: TaskItemProps) {
     return (
         <TaskItemWrapper className={className}>
             <header>
@@ -56,13 +59,15 @@ function TaskItem({id, date, isCompleted, text,title, className}: TaskItemProps)
                     {title}
                 </span>
 
-                <CloseButton className="close" />
-                <TaskState className="state" selected={isCompleted}/>
+                <CloseButton className="close" onClose={onClose}/>
+                <TaskState className="state" onSelect={onComplete} selected={isCompleted}/>
             </header>
 
-            <div className="content">
-                {text}
-            </div>
+            <p className="content">
+                    {text}
+            </p>
+
+
         </TaskItemWrapper>
     );
 }

@@ -9,9 +9,10 @@ export interface StyledComponentsProps {
 
 export interface TodosContext {
     todos: TodoTask[];
-    // deleteTodo: (id: number) => {};
-    // completeTodo: (id: number) => {};
-    addTodo: (title: string, text: string, date: TaskDate) => void;
+    closeTodo(id: number): void;
+    completeTodo(id: number): void;
+    completeAll(date: TaskDate): void;
+    addTodo(title, text, date): void;
 }
 
 

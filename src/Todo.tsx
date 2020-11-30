@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from './styles/GlobalStyle';
 import { AddTask } from './containers/AddTask';
 import TaskList from './containers/TaskList';
-import { TodosContext } from './types/global';
+import { TodosContext, TodoTask } from './types/global';
 import { TaskDate } from './types/enums';
 import { generateId } from './utils/util';
 
 const ModuleWrapper = styled.section`
   background: white;
   max-width: 100%;
-  height: 100%;
+ 
   #content {
     display:flex;
     height: 100%;
@@ -28,27 +28,65 @@ const ModuleWrapper = styled.section`
   }
 `;
 
-//
-// export const context: TodosContext = {
-//     todos: [
-//         {
-//             id:1,
-//             title: "test",
-//             text: "text",
-//             date: TaskDate.TODAY,
-//             isCompleted: false
-//         }
-//     ],
-//     addTodo: ( title: string, text: string, date: TaskDate) => {
-//         this?.todos?.push(
-//             {id: generateId(), title: title, text: text, date: date, isCompleted: false}
-//         );
-//     }
-// };
+
+export const ListContext = React.createContext<TodosContext>(null);
+
+export function ListContextProvider({children}) {
+    const [todos, setTodos] = useState<TodoTask[]>([]);
+    const addTodo = (title, text, date) => {
+        const id = generateId();
+        const newTodos = [...todos];
+        newTodos.push({id: id, title: title, text: text, isCompleted: false, date: date})
+
+        setTodos(newTodos);
+    };
+
+    const closeTodo = (id: number) => {
+        let newTodos = [...todos];
+        newTodos = newTodos.filter((todo) => todo.id != id);
+
+        setTodos(newTodos);
+    };
+
+    const completeTodo = (id: number) => {
+        let newTodos = [...todos];
+        let todo = newTodos.find(todo => todo.id === id);
+        if (todo) {
+            todo.isCompleted = !todo.isCompleted;
+        }
+
+        setTodos(newTodos);
+    };
+
+    const completeAll= (date: TaskDate) => {
+        let newTodos = [...todos];
+
+        newTodos.forEach(todo => {
+            if(todo.date === date) {
+                todo.isCompleted = true
+            }
+        });
+
+        setTodos(newTodos);
+    };
+
+    const context: TodosContext = {
+        todos: todos,
+        addTodo,
+        closeTodo: closeTodo,
+        completeTodo: completeTodo,
+        completeAll: completeAll
+    };
+
+    return (
+        <ListContext.Provider value={context}>
+            {children}
+        </ListContext.Provider>
+    );
+
+}
 
 
-
-// export const ListContext = React.createContext<TodosContext>(context);
 
 function TodoContainer() {
 
@@ -57,15 +95,15 @@ function TodoContainer() {
 
             <main id="content">
                 <section id="add-form" className="column">
-                    <AddTask/>
+                    <AddTask />
                 </section>
 
                 <section id="today-list" className="column center">
-                    <TaskList/>
+                    <TaskList title="My today todo" date={TaskDate.TODAY}/>
                 </section>
 
                 <section id="tomorrow-list" className="column">
-                    <TaskList/>
+                    <TaskList title="My tomorrow todo"  date={TaskDate.TOMORROW}/>
                 </section>
 
 
@@ -78,9 +116,9 @@ function TodoContainer() {
 const Todo = () => (
     <>
         <GlobalStyle />
-            {/*<ListContext.Provider value={context}>*/}
-                <TodoContainer />
-            {/*</ListContext.Provider>*/}
+        <ListContextProvider>
+            <TodoContainer />
+        </ListContextProvider>
     </>
 );
 
